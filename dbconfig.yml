@@ -1,0 +1,5 @@
+development:
+    dialect: postgres
+    datasource: dbname=bookings port=5432 user=bookings password=watchmovies sslmode=disable
+    dir: migrations
+    table: migrations
