@@ -11,7 +11,7 @@ CREATE TABLE booking (
     payment_id uuid NOT NULL REFERENCES payment(id),
     created_at timestamp NOT NULL DEFAULT now(),
     updated_at timestamp NOT NULL DEFAULT now()
-)
+);
 
 
 CREATE TABLE booking_audit (
@@ -26,5 +26,23 @@ CREATE TABLE booking_audit (
     payment_id uuid NOT NULL REFERENCES payment(id),
     created_at timestamp NOT NULL DEFAULT now(),
     updated_at timestamp NOT NULL DEFAULT now()
-)
+);
+
+CREATE TRIGGER tr_booking_updated_at
+    BEFORE UPDATE ON booking
+    FOR EACH ROW EXECUTE PROCEDURE set_updated_at_column();
+
+CREATE TRIGGER tr_booking_audit
+    AFTER INSERT OR UPDATE OR DELETE ON booking
+    FOR EACH ROW
+    EXECUTE PROCEDURE audit_trigger();
+
+
 -- +migrate Down
+DROP TRIGGER IF EXISTS tr_booking_updated_at on booking;
+DROP TABLE IF EXISTS booking;
+
+
+DROP TRIGGER IF EXISTS tr_booking_audit_updated_at on booking;
+DROP TABLE IF EXISTS booking_audit;
+DROP TYPE IF EXISTS booking_status;

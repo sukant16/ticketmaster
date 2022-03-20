@@ -17,7 +17,7 @@ CREATE TABLE account_audit (
     audit_operation varchar(255) NOT NULL,
     audit_time timestamp NOT NULL,
     audit_user varchar(255) NOT NULL,
-    id uuid PRIMARY KEY,
+    id uuid,
     account_status smallint NOT NULL,
     created_at timestamp NOT NULL DEFAULT now(),
     updated_at timestamp NOT NULL DEFAULT now()
@@ -34,7 +34,9 @@ CREATE TRIGGER tr_account_audit
 
 -- +migrate Down
 DROP TRIGGER IF EXISTS tr_account_updated_at on account;
-DROP TABLE IF NOT EXISTS account;
+DROP TABLE IF EXISTS account;
 
 DROP TRIGGER IF EXISTS tr_account_audit_updated_at on account;
-DROP TABLE IF NOT EXISTS account_audit;
+DROP TABLE IF EXISTS account_audit;
+DROP TYPE IF EXISTS account_status;
+DROP TYPE IF EXISTS account_category;

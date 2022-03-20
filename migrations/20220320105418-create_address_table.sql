@@ -44,5 +44,5 @@ DROP TRIGGER IF EXISTS tr_user_address_updated_at on user_address;
 DROP TABLE IF EXISTS user_address;
 
 DROP TRIGGER IF EXISTS tr_user_address_audit_updated_at on user_address;
-DROP TABLE IF NOT EXISTS user_address_audit;
+DROP TABLE IF EXISTS user_address_audit;
 

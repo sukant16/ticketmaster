@@ -1,7 +1,7 @@
 
 -- +migrate Up
 
-CREATE TYPE payment_status as ENUM ('paid', 'unpaid', 'pending', 'declined', 'canceled', 'refunded', 'settled');) 
+CREATE TYPE payment_status as ENUM ('paid', 'unpaid', 'pending', 'declined', 'canceled', 'refunded', 'settled');
 
 CREATE TABLE payment(
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -39,4 +39,5 @@ DROP TRIGGER IF EXISTS tr_payment_updated_at on payment;
 DROP TABLE IF EXISTS payment;
 
 DROP TRIGGER IF EXISTS tr_payment_audit_updated_at on payment;
-DROP TABLE IF NOT EXISTS payment_audit;
+DROP TABLE IF EXISTS payment_audit;
+DROP TYPE IF EXISTS payment_status;

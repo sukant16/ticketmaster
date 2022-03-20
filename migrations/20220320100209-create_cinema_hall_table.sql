@@ -4,7 +4,7 @@
 CREATE TABLE cinema (
     id SERIAL UNIQUE PRIMARY KEY,
     name text NOT NULL,
-    num_cinema_halls smallint NOT NULL,
+    num_halls smallint NOT NULL,
     street_address text NOT NULL,
     city text NOT NULL,
     state text NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE cinema_audit (
     audit_user varchar(255) NOT NULL,
     id int,
     name text NOT NULL,
-    num_cinema_halls smallint NOT NULL,
+    num_halls smallint NOT NULL,
     street_address text NOT NULL,
     city text NOT NULL,
     state text NOT NULL,
@@ -51,4 +51,4 @@ DROP TRIGGER IF EXISTS tr_cinema_updated_at on cinema;
 DROP TABLE IF EXISTS cinema;
 
 DROP TRIGGER IF EXISTS tr_cinema_audit_updated_at on cinema;
-DROP TABLE IF NOT EXISTS cinema_audit;
+DROP TABLE IF EXISTS cinema_audit;

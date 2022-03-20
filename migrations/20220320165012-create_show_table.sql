@@ -5,8 +5,8 @@ CREATE TABLE show (
     created_on DATE NOT NULL,
     start_time timestamp NOT NULL,
     end_time timestamp NOT NULL,
-    movie_id uuid NOT NULL REFERENCES movies(id),
-    hall_id uuid NOT NULL REFERENCES cinema_halls(id),
+    movie_id uuid NOT NULL REFERENCES movie(id),
+    hall_id int NOT NULL REFERENCES hall(id),
     created_at timestamp NOT NULL DEFAULT now(),
     updated_at timestamp NOT NULL DEFAULT now()
 );
